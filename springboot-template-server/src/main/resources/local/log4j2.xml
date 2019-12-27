@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration code="info" packages="com.qudian.universe.scm.base.common.log">
+    <appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <SensitivePatternLayout pattern="%d{yyyy/MM/dd HH:mm:ss.SSS} %t [%p] %c{1} (%F:%L) %msg%n">
+                <replaces>
+                    <!-- 身份证号 18位 -->
+                    <replace regex="([1-9]\d{2})\d{11}(\d{3}[0-9Xx])" replacement="$1**************$2"/>
+                    <!-- 银行卡号 -->
+                    <replace regex="(\d{4})\d{8}(\d{3})" replacement="$1*****$2"/>
+                    <!-- 手机号码 -->
+                    <replace regex="(1\d{2})\d{4}(\d{4})" replacement="$1****$2"/>
+                </replaces>
+            </SensitivePatternLayout>
+        </Console>
+    </appenders>
+    <loggers>
+        <root level="info">
+            <appender-ref ref="console"/>
+        </root>
+        <Logger name="com.qudian.universe.scm.base.dao.mapper" level="debug" additivity="false">
+            <Appender-ref ref="console"/>
+        </Logger>
+    </loggers>
+</configuration>
